@@ -20,7 +20,8 @@ RUN apt-get update && \
   apt-get install -y apt-utils && \
   apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
   apt-get install -y wget sudo moreutils patch tzdata && \
-  apt-get install -y openjdk-8-jre-headless jsvc
+  apt-get install -y openjdk-8-jre-headless jsvc && \
+  apt-get install -y dumb-init
 
 # Add mongodb 3.4 repo and install
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 && \
@@ -57,4 +58,5 @@ EXPOSE 7080/tcp 7443/tcp
 EXPOSE 7445/tcp 7446/tcp
 
 # Run this potato
-ENTRYPOINT ["/run.sh"]
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["/run.sh"]
