@@ -1,0 +1,31 @@
+version: '3'
+services:
+  unifi-video-controller:
+    image: shauber/unifi-video-controller:latest
+    container_name: unifi-nvr
+    restart: always
+    ports:
+      - 1935:1935
+      - 6666:6666
+      - 7004:7004
+      - 7080:7080
+      - 7442:7442
+      - 7443:7443
+      - 7444:7444
+      - 7445:7445
+      - 7446:7446
+      - 7447:7447
+      - 10001:10001/udp
+      - 7004:7004/udp
+    volumes:
+      - /data/unifi-video:/var/lib/unifi-video
+      - /data/nvr-recordings:/media
+    environment:
+      - TZ=America/America/New_York
+      - DEBUG=1
+      - PUID=99
+      - PGID=100
+    cap_add:
+      - SYS_ADMIN
+      - DAC_READ_SEARCH
+

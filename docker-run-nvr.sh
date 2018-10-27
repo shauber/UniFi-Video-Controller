@@ -19,4 +19,6 @@ docker run \
         -e PUID=99 \
         -e PGID=100 \
         -e DEBUG=1 \
-        shauber/unifi-video-controller:3.9.7
+	-d \
+	--restart always \
+        shauber/unifi-video-controller:latest
