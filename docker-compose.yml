@@ -1,7 +1,7 @@
 version: '3'
 services:
   unifi-video-controller:
-    image: shauber/unifi-video-controller:latest
+    image: shauber/unifi-video-controller:3.9.12
     container_name: unifi-nvr
     restart: always
     ports:
