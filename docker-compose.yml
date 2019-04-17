@@ -1,7 +1,7 @@
 version: '3'
 services:
   unifi-video-controller:
-    image: shauber/unifi-video-controller:3.9.12
+    image: shauber/unifi-video-controller:3.10.2
     container_name: unifi-nvr
     restart: always
     ports:
@@ -18,8 +18,10 @@ services:
       - 10001:10001/udp
       - 7004:7004/udp
     volumes:
+#      - nvr-nfs-lib:/var/lib/unifi-video
+      - nvr-nfs-media:/media
       - /data/unifi-video:/var/lib/unifi-video
-      - /data/nvr-recordings:/media
+#      - /data/nvr-recordings:/media
     environment:
       - TZ=America/America/New_York
       - DEBUG=1
@@ -28,4 +30,16 @@ services:
     cap_add:
       - SYS_ADMIN
       - DAC_READ_SEARCH
-
+volumes:
+  nvr-nfs-lib:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=aleph.shauber.net,rw"
+      device: ":/unifi-nvr/lib"
+  nvr-nfs-media:
+    driver: local
+    driver_opts:
+      type: "nfs"
+      o: "addr=aleph.shauber.net,rw"
+      device: ":/unifi-nvr/media"
