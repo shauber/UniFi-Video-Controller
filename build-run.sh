@@ -1,7 +1,9 @@
 #!/bin/bash
 
+docker build . -t nvr-test
+
 docker run \
-        --name unifi-video \
+        --name nvr-test \
         --cap-add SYS_ADMIN \
         --cap-add DAC_READ_SEARCH \
         -p 1935:1935 \
@@ -19,6 +21,6 @@ docker run \
         -e PUID=99 \
         -e PGID=100 \
         -e DEBUG=1 \
-	-d \
-	--restart always \
-        shauber/unifi-video-controller:latest
+	-it \
+	--rm \
+        nvr-test:latest
