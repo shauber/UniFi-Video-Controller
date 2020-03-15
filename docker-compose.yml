@@ -1,7 +1,7 @@
 version: '3'
 services:
   unifi-video-controller:
-    image: shauber/unifi-video-controller:3.10.2
+    image: pducharme/unifi-video-controller:3.10.10
     container_name: unifi-nvr
     restart: always
     ports:
@@ -23,7 +23,7 @@ services:
       - /data/unifi-video:/var/lib/unifi-video
 #      - /data/nvr-recordings:/media
     environment:
-      - TZ=America/America/New_York
+      - TZ=America/New_York
       - DEBUG=1
       - PUID=99
       - PGID=100
